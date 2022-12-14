@@ -1,9 +1,9 @@
 ---
 layout: post
-title: An exhibit of Markdown
-subtitle: Each post also has a subtitle
+title: 최적전략(Optimal Strategy) 알고리즘
+subtitle: 최적전략 알고리즘을 이용한 항상 승리하는 알고리즘 만들기
 categories: markdown
-tags: [example, markdown]
+tags: [dynamic, programming, algorithm]
 ---
 
 This note demonstrates some of what [Markdown][1] is capable of doing.
