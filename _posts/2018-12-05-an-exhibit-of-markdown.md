@@ -6,89 +6,59 @@ categories: markdown
 tags: [dynamic, programming, algorithm]
 ---
 
-This note demonstrates some of what [Markdown][1] is capable of doing.
 
-## An exhibit of Markdown
+## 최적전략 알고리즘 문제 설명
 
+```java
+int list = {2, 7, 40, 19, 4, 9}
+```
 
+위 배열과 같이 짝수개의 숫자 카드가 일렬로 놓여있습니다. 나와 상대방 
+이 번갈아 가면서 카드를 가지고 올 수 있는데 현재 놓여있는 카드 중에서 맨 앞에 있는 카드 또는 맨 뒤에 있는 카드를 가지고 올 수 있습니다.
 
-*Note: Feel free to play with this page. Unlike regular notes, this doesn't automatically save itself.*
+예를들어 [2, 7, 40, 19, 4, 9] 카드가 있다면 카드를 가지고 올 때 맨 앞에 있는 2 또는 맨 뒤에 있는 9를 가지고 올 수 있습니다. 처음부터 40이나 19를 가지고 올 수는 없습니다.
 
-## Basic formatting
+[2, 7, 40, 19, 4, 9]여기에서 9를 가지고 왔다면 상대방은 [2, 7, 40, 19, 4] 중 2와 4를 가지고 갈 수 있습니다.
 
-Paragraphs can be written like so. A paragraph is the basic block of Markdown. A paragraph is what text will turn into when there is no reason it should become anything else.
+이 게임은 가지고온 카드의 숫자 총 합이 많은 사람이 이기는 게임입니다.
 
-Paragraphs must be separated by a blank line. Basic formatting of *italics* and **bold** is supported. This *can be **nested** like* so.
-
-## Lists
-
-### Ordered list
-
-1. Item 1
-2. A second item
-3. Number 3
-4. Ⅳ
-
-*Note: the fourth item uses the Unicode character for [Roman numeral four][2].*
-
-### Unordered list
-
-* An item
-* Another item
-* Yet another item
-* And there's more...
-
-## Paragraph modifiers
-
-### Code block
-
-    Code blocks are very useful for developers and other people who look at code or other things that are written in plain text. As you can see, it uses a fixed-width font.
-
-You can also make `inline code` to add code into other things.
-
-### Quote
-
-> Here is a quote. What this is should be self explanatory. Quotes are automatically indented when they are used.
-
-## Headings
-
-There are six levels of headings. They correspond with the six levels of HTML headings. You've probably noticed them already in the page. Each level down uses one more hash character.
-
-### Headings *can* also contain **formatting**
-
-### They can even contain `inline code`
-
-Of course, demonstrating what headings look like messes up the structure of the page.
-
-I don't recommend using more than three or four levels of headings here, because, when you're smallest heading isn't too small, and you're largest heading isn't too big, and you want each size up to look noticeably larger and more important, there there are only so many sizes that you can use.
-
-## URLs
-
-URLs can be made in a handful of ways:
-
-* A named link to [MarkItDown][3]. The easiest way to do these is to select what you want to make a link and hit `Ctrl+L`.
-* Another named link to [MarkItDown](https://www.markitdown.net/)
-* Sometimes you just want a URL like <https://www.markitdown.net/>.
-
-## Horizontal rule
-
-A horizontal rule is a line that goes across the middle of the page.
-
----
-
-It's sometimes handy for breaking things up.
-
-## Images
-
-Markdown can also contain images. I'll need to add something here sometime.
-
-## Finally
-
-There's actually a lot more to Markdown than this. See the official [introduction][4] and [syntax][5] for more information. However, be aware that this is not using the official implementation, and this might work subtly differently in some of the little things.
+내가 먼저 카드를 가지고 올 수 있을 때. 이 게임에서 항상 승리 할 수 있는 알고리즘을 만들어 보세요. 여기에서 상대방은 단순히 남아있는 숫자 중 큰 숫자를 가지고 가는 것이 아니라 그 순간에 최적의 선택을 합니다.
 
 
-  [1]: https://daringfireball.net/projects/markdown/
-  [2]: https://www.fileformat.info/info/unicode/char/2163/index.htm
-  [3]: https://www.markitdown.net/
-  [4]: https://daringfireball.net/projects/markdown/basics
-  [5]: https://daringfireball.net/projects/markdown/syntax
+### 목차
+
+1. 문제 풀이 방향 설명
+2. 단계1 - 숫자가 1개만 있는 경우 최적 선택
+
+
+## 문제 풀이 방향
+
+> Dynamic Programming을 적용하여 풀 예정입니다.
+
+숫자가 4개만 있는 경우의 최적 선택은 숫자가 3개만 있는 최적 선택을 기준으로 최적 선택 값을 특정 할 수 있습니다.
+
+예를들면 2, 7, 40, 19가 있을 때 최적 선택은
+
+2, 7, 40만 있을때의 최적선택과 7, 40, 19만 있을때의 최적 선택을 참고하여 어떤것이 최적인지를 알 수 있습니다.
+
+마찬가지로 숫자가 3개만 있을 때의 최적 선택은 숫자가 2개만 있을때의 최적 선택을 참고하여 알 수 있습니다. 2, 7, 40 이렇게 3개의 숫자만 있는 경우의 최적 선택은 2, 7만 있을때와 7, 40만 있을때의 최적 선택을 했을때를 참고할 수 있습니다.
+
+
+## 단계 1 - 숫자가 1개만 있는 경우 최적 선택
+
+숫자가 1개만 있을 때의 최적 선택은 아래와 같이 **dp**에 기록 할 수 있습니다.
+
+| 2   | 7   | 40   | 19   |
+|-----|-----|------|------|
+| 2,0 |     |      |      |
+|     | 7,0 |      |      |
+|     |     | 40,0 |      |
+|     |     |      | 19,0 |
+
+
+
+*Note: 숫자가 1개인 경우 상대방은 가져갈 카드가 없기 때문에 0으로 표시 합니다.
+
+
+
+
